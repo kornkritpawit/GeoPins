@@ -1,10 +1,12 @@
 const User = require('../models/User')
 const {OAuth2Client} = require('google-auth-library')
 
-require('dotenv').config()
+// require('dotenv').config()
 console.log(process.env.OAUTH_CLIENT_ID)
-
-const client = new OAuth2Client(process.env.OAUTH_CLIENT_ID)
+ 
+const client = new OAuth2Client(
+  // process.env.OAUTH_CLIENT_ID
+  )
 
 exports.findOrCreateUser = async token => {
   //verify auth token
@@ -21,7 +23,7 @@ const verifyAuthToken = async token => {
   try{
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience: process.env.OAUTH_CLIENT_ID
+      // audience: process.env.OAUTH_CLIENT_ID
     })
     // console.log(ticket.getPayload())
     return ticket.getPayload() //return google user like on success in react Login
